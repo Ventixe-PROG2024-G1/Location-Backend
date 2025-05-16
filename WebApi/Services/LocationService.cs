@@ -146,7 +146,7 @@ public class LocationService(LocationRepository repo) : LocationGrpcService.Loca
         }
     }
 
-    public async override Task<ActionReply> UpdateLocation(LocationEditRequest request, ServerCallContext context)
+    public async override Task<ActionReply> UpdateLocation(LocationUpdateRequest request, ServerCallContext context)
     {
         try
         {
