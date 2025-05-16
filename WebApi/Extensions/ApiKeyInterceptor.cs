@@ -1,11 +1,9 @@
 ﻿using Grpc.Core;
 using Grpc.Core.Interceptors;
-using Microsoft.Extensions.Configuration;
-using System.Reflection.Metadata.Ecma335;
 
 namespace WebApi.Extensions;
 
-// Partialy writen using our old friend ChatGPT
+// Partialy AI writen using our old friend ChatGPT
 public class ApiKeyInterceptor(IConfiguration config) : Interceptor
 {
     private readonly IConfiguration _config = config;
@@ -13,14 +11,37 @@ public class ApiKeyInterceptor(IConfiguration config) : Interceptor
     public override async Task<TResponse> UnaryServerHandler<TRequest, TResponse>(
         TRequest request, ServerCallContext context, UnaryServerMethod<TRequest, TResponse> continuation)
     {
-        var key = _config["SecretKeys:ApiKey"];
+        try
+        {
+            var key = _config["SecretKeys:ApiKey"];
 
-        var meta = context.RequestHeaders;
-        var keyHeader = meta.FirstOrDefault(m => m.Key.ToLower() == "location-api-key");
+            var meta = context.RequestHeaders;
+            var keyHeader = meta.FirstOrDefault(m => m.Key.ToLower() == "location-api-key");
 
-        if (string.IsNullOrEmpty(key) || keyHeader == null || keyHeader.Value != key)
-            throw new RpcException(new Status(StatusCode.Unauthenticated, "Invalid or missing API KEY"));
+            if (string.IsNullOrEmpty(key) || keyHeader == null || keyHeader.Value != key)
+                return CreateErrorResponse<TResponse>("Invalid or missing API-KEY", 401);
 
-        return await continuation(request, context);
+            return await continuation(request, context);
+        }
+        catch (Exception ex)
+        {
+            return CreateErrorResponse<TResponse>(ex.Message, 500);
+        }
+    }
+
+    private TResponse CreateErrorResponse<TResponse>(string message, int statusCode)
+    {
+        var response = Activator.CreateInstance<TResponse>();
+        var type = typeof(TResponse);
+
+        var succeededProp = type.GetProperty("Succeeded");
+        var statusCodeProp = type.GetProperty("StatusCode");
+        var messageProp = type.GetProperty("Message");
+
+        succeededProp?.SetValue(response, false);
+        statusCodeProp?.SetValue(response, statusCode);
+        messageProp?.SetValue(response, message);
+
+        return response;
     }
 }
