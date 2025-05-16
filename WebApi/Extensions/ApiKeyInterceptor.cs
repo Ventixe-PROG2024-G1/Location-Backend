@@ -5,6 +5,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace WebApi.Extensions;
 
+// Partialy writen using our old friend ChatGPT
 public class ApiKeyInterceptor(IConfiguration config) : Interceptor
 {
     private readonly IConfiguration _config = config;
