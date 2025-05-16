@@ -32,6 +32,15 @@ public class LocationService(LocationRepository repo) : LocationGrpcService.Loca
                 Message = ex.Message
             };
         }
+        catch (Exception ex)
+        {
+            return new ActionReply
+            {
+                Succeeded = false,
+                StatusCode = 500,
+                Message = ex.Message
+            };
+        }
     }
 
     public async override Task<ActionReply> DeleteLocation(LocationRequest request, ServerCallContext context)
@@ -55,6 +64,15 @@ public class LocationService(LocationRepository repo) : LocationGrpcService.Loca
                 Message = ex.Message
             };
         }
+        catch (Exception ex)
+        {
+            return new ActionReply
+            {
+                Succeeded = false,
+                StatusCode = 500,
+                Message = ex.Message
+            };
+        }
     }
 
     public async override Task<LocationReply> GetLocation(LocationRequest request, ServerCallContext context)
@@ -75,6 +93,15 @@ public class LocationService(LocationRepository repo) : LocationGrpcService.Loca
             {
                 Succeeded = false,
                 StatusCode = ((int)ex.StatusCode),
+                Message = ex.Message
+            };
+        }
+        catch (Exception ex)
+        {
+            return new LocationReply
+            {
+                Succeeded = false,
+                StatusCode = 500,
                 Message = ex.Message
             };
         }
@@ -108,9 +135,18 @@ public class LocationService(LocationRepository repo) : LocationGrpcService.Loca
                 Message = ex.Message
             };
         }
+        catch (Exception ex)
+        {
+            return new LocationsReply
+            {
+                Succeeded = false,
+                StatusCode = 500,
+                Message = ex.Message
+            };
+        }
     }
 
-    public async override Task<ActionReply> UpdateLocation(LocationAddRequest request, ServerCallContext context)
+    public async override Task<ActionReply> UpdateLocation(LocationUpdateRequest request, ServerCallContext context)
     {
         try
         {
@@ -128,6 +164,15 @@ public class LocationService(LocationRepository repo) : LocationGrpcService.Loca
             {
                 Succeeded = false,
                 StatusCode = ((int)ex.StatusCode),
+                Message = ex.Message
+            };
+        }
+        catch (Exception ex)
+        {
+            return new ActionReply
+            {
+                Succeeded = false,
+                StatusCode = 500,
                 Message = ex.Message
             };
         }

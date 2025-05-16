@@ -56,11 +56,13 @@ public static class LocationMapper
 
             Direction = new DirectionEntity
             {
+                LocationId = dto.Id,
                 Car = dto.CarDirection,
                 Metro = dto.MetroDirection,
                 Bus = dto.BusDirection
             }
         };
+        //entity.Direction.Location = entity;
         return entity;
     }
 }

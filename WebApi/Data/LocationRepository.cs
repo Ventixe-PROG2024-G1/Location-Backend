@@ -81,7 +81,8 @@ public class LocationRepository(LocationContext context, LocationCache cache)
 
         try
         {
-            _context.Locations.Update(LocationMapper.MapTo(dto));
+            var entity = LocationMapper.MapTo(dto);
+            _context.Locations.Update(entity);
             await _context.SaveChangesAsync();
             await RefreshCache();
             return new DataResponse { Succeded = true, StatusCode = 200 };
