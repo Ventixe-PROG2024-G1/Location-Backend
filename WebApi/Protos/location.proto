@@ -10,7 +10,7 @@ service LocationGrpcService {
 	rpc GetLocation (LocationRequest) returns (LocationReply);
     rpc GetLocations (google.protobuf.Empty) returns (LocationsReply);
     rpc AddLocation (LocationAddRequest) returns (ActionReply);
-    rpc UpdateLocation (LocationEditRequest) returns (ActionReply);
+    rpc UpdateLocation (LocationUpdateRequest) returns (ActionReply);
     rpc DeleteLocation (LocationRequest) returns (ActionReply);
 }
 
