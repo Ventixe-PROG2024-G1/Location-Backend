@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
 using WebApi.Extensions;
+using WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,5 +19,9 @@ builder.Services.AddScoped<LocationCache>();
 builder.Services.AddScoped<LocationRepository>();
 
 var app = builder.Build();
+
+app.MapGrpcService<LocationService>();
+
+app.MapGet("/", () => "gRPC Server Running");
 
 app.Run();
