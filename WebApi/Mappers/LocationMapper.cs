@@ -62,7 +62,6 @@ public static class LocationMapper
                 Bus = dto.BusDirection
             }
         };
-        //entity.Direction.Location = entity;
         return entity;
     }
 }
