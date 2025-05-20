@@ -10,6 +10,17 @@ builder.Services.AddGrpc(o =>
     o.Interceptors.Add<ApiKeyInterceptor>();
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Dev", policy =>
+    {
+        policy
+            .WithOrigins("*")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddMemoryCache();
 
 builder.Services.AddDbContext<LocationContext>(e => e.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
@@ -20,10 +31,10 @@ builder.Services.AddScoped<LocationRepository>();
 
 var app = builder.Build();
 
-app.UseGrpcWeb();
+app.UseCors("Dev");
 
-app.MapGrpcService<LocationService>().EnableGrpcWeb();
+app.MapGrpcService<LocationService>();
 
-app.MapGet("/", () => "gRPC Server Running");
+app.MapGet("/", () => "gRPC Server Running!!!");
 
 app.Run();
