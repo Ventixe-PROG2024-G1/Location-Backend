@@ -20,7 +20,9 @@ builder.Services.AddScoped<LocationRepository>();
 
 var app = builder.Build();
 
-app.MapGrpcService<LocationService>();
+app.UseGrpcWeb();
+
+app.MapGrpcService<LocationService>().EnableGrpcWeb();
 
 app.MapGet("/", () => "gRPC Server Running");
 
