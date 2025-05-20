@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /WebApi/appsettings.json
 /WebApi/appsettings.Development.json
+/WebApi/Properties/ServiceDependencies/ventixe-locationservice - Zip Deploy/profile.arm.json
