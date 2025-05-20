@@ -16,7 +16,7 @@ public class ApiKeyInterceptor(IConfiguration config) : Interceptor
             var key = _config["SecretKeys:ApiKey"];
 
             var meta = context.RequestHeaders;
-            var keyHeader = meta.FirstOrDefault(m => m.Key.ToLower() == "location-api-key");
+            var keyHeader = meta.FirstOrDefault(m => string.Equals(m.Key, "location-api-key", StringComparison.OrdinalIgnoreCase));
 
             if (string.IsNullOrEmpty(key) || keyHeader == null || keyHeader.Value != key)
                 return CreateErrorResponse<TResponse>("Invalid or missing API-KEY", 401);
