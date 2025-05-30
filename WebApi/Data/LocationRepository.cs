@@ -5,10 +5,20 @@ using WebApi.Models;
 
 namespace WebApi.Data;
 
-public class LocationRepository(LocationContext context, LocationCache cache)
+public interface ILocationRepository
+{
+    Task<DataResponse> AddAsync(AddLocationDto dto);
+    Task<DataResponse> DeleteAsync(string id);
+    Task<DataResponse> ExistsAsync(string id);
+    Task<DataResponse<IEnumerable<LocationModel>>> GetAllAsync();
+    Task<DataResponse<LocationModel>> GetAsync(string id);
+    Task<DataResponse> UpdateAsync(EditLocationDto dto);
+}
+
+public class LocationRepository(LocationContext context, ILocationCache cache) : ILocationRepository
 {
     private readonly LocationContext _context = context;
-    private readonly LocationCache _cache = cache;
+    private readonly ILocationCache _cache = cache;
 
     public async Task<DataResponse> ExistsAsync(string id)
     {

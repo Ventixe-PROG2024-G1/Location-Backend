@@ -7,9 +7,9 @@ using WebApi.Models;
 
 namespace WebApi.Services;
 
-public class LocationService(LocationRepository repo) : LocationGrpcService.LocationGrpcServiceBase
+public class LocationService(ILocationRepository repo) : LocationGrpcService.LocationGrpcServiceBase
 {
-    private readonly LocationRepository _repo = repo;
+    private readonly ILocationRepository _repo = repo;
 
     public async override Task<ActionReply> AddLocation(LocationAddRequest request, ServerCallContext context)
     {

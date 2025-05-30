@@ -63,8 +63,8 @@ builder.Services.AddMemoryCache();
 builder.Services.AddDbContext<LocationContext>(e => e.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
 
 builder.Services.AddSingleton<ApiKeyInterceptor>();
-builder.Services.AddScoped<LocationCache>();
-builder.Services.AddScoped<LocationRepository>();
+builder.Services.AddScoped<ILocationCache, LocationCache>();
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 
 var app = builder.Build();
 
