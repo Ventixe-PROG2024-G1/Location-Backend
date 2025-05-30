@@ -1,17 +1,13 @@
 ﻿using FluentAssertions;
 using Grpc.Core;
+using Grpc.Core.Testing;
 using Microsoft.Extensions.Configuration;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WebApi.Extensions;
-using Grpc.Core.Testing;
 
 namespace WebApi.Tests.Extensions;
 
+// Partially AI Written
 public class ApiKeyInterceptor_Tests
 {
     private const string ValidApiKey = "correct-key";

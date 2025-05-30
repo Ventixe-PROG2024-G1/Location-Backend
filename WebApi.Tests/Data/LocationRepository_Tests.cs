@@ -6,6 +6,7 @@ using WebApi.Models;
 
 namespace WebApi.Tests.Data;
 
+// AI Written
 public class LocationRepository_Tests
 {
     private readonly LocationContext _context;

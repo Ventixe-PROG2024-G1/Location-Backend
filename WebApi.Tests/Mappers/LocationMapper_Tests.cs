@@ -4,6 +4,7 @@ using WebApi.Models;
 
 namespace WebApi.Tests.Mappers;
 
+// AI Written
 public class LocationMapper_Tests
 {
     [Fact]

@@ -9,6 +9,7 @@ using WebApi.Extensions;
 
 namespace WebApi.Tests.Extensions;
 
+// Partially AI Written
 public class UseApiKeyAttribute_Tests
 {
     private readonly string _expectedApiKey = "secret-key";

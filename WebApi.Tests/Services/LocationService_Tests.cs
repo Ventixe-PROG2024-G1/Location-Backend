@@ -1,20 +1,16 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using Grpc.Core.Testing;
+﻿using FluentAssertions;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
+using Grpc.Core.Testing;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WebApi.Data;
 using WebApi.Grpc;
-using WebApi.Services;
 using WebApi.Models;
-using FluentAssertions;
+using WebApi.Services;
 
 namespace WebApi.Tests.Services;
 
+// Partially AI Written
 public class LocationService_Tests
 {
     private readonly Mock<ILocationRepository> _repoMock;
