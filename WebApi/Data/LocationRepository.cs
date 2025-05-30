@@ -91,7 +91,11 @@ public class LocationRepository(LocationContext context, ILocationCache cache) :
 
         try
         {
-            var entity = LocationMapper.MapTo(dto);
+            var entity = _context.Locations.FirstOrDefault(l => l.Id == dto.Id);
+            if (entity == null)
+                return new DataResponse { Succeded = false, StatusCode = 404 }; 
+
+            entity = LocationMapper.MapTo(dto, entity);
             _context.Locations.Update(entity);
             await _context.SaveChangesAsync();
             await RefreshCache();
