@@ -10,9 +10,9 @@ namespace WebApi.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    public class LocationsController(LocationRepository repo) : ControllerBase
+    public class LocationsController(ILocationRepository repo) : ControllerBase
     {
-        private readonly LocationRepository _repo = repo;
+        private readonly ILocationRepository _repo = repo;
 
         [HttpGet]
         [UseApiKey]
