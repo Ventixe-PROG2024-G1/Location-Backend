@@ -43,25 +43,17 @@ public static class LocationMapper
         return entity;
     }
 
-    public static LocationEntity MapTo(EditLocationDto dto)
+    public static LocationEntity MapTo(EditLocationDto dto, LocationEntity entity)
     {
-        var entity = new LocationEntity
-        {
-            Id = dto.Id,
-            LocationName = dto.LocationName,
-            StreetAddress = dto.StreetAddress,
-            PostalCode = dto.PostalCode,
-            CityName = dto.CityName,
-            MapId = dto.MapId,
+        entity.LocationName = dto.LocationName;
+        entity.StreetAddress = dto.StreetAddress;
+        entity.PostalCode = dto.PostalCode;
+        entity.CityName = dto.CityName;
+        entity.MapId = dto.MapId;
 
-            Direction = new DirectionEntity
-            {
-                LocationId = dto.Id,
-                Car = dto.CarDirection,
-                Metro = dto.MetroDirection,
-                Bus = dto.BusDirection
-            }
-        };
+        entity.Direction.Car = dto.CarDirection;
+        entity.Direction.Metro = dto.MetroDirection;
+        entity.Direction.Bus = dto.BusDirection;
         return entity;
     }
 }
